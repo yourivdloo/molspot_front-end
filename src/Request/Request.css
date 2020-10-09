@@ -1,0 +1,41 @@
+.button{
+    background-color: #7BBA52 !important;
+    color: #282c34 !important;
+    font-weight: bold !important;
+}
+.button:hover{
+    background-color: #5C8A3D !important;
+}
+
+.input-field{
+    font-weight: bold !important;
+    margin-top: 20px !important;
+}
+
+.container{
+    width: 20%;
+    height: 100%;
+    text-align: center;
+}
+
+.right{
+    float: right;
+    padding-right: 60%;
+}
+.left{
+    float: left;
+}
+
+.header{
+    padding-left: 40px;
+}
+
+.header-box{
+    background-color: #7BBA52 !important;
+    color: #282c34 !important;
+    font-weight: bold !important;
+}
+
+.top-padding{
+    padding-top: 50px;
+}
