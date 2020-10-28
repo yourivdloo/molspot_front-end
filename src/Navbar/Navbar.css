@@ -1,0 +1,21 @@
+.btn-group{
+    min-width: 70%;
+    min-height: 100%;
+}
+
+.nav-button{
+    min-height: 70px;
+}
+
+.login-group{
+    min-width: 15%;
+}
+
+.title{
+    min-width: 15%;
+    float: left;
+}
+
+.navbar{
+    background-color: #7BBA52 !important;
+}

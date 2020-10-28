@@ -8,7 +8,8 @@ class Request extends Component {
 constructor(props) {
     super(props);
     this.state = {
-        candidates:[]
+        candidates:[],
+        //candidate: Object
     }
 }
 
@@ -21,34 +22,77 @@ getAllCandidates() {
 }
 
 getCandidateById() {
-    fetch('http://localhost:8080/candidates?id=')
+    //Werkt nog niet
+    fetch('http://localhost:8080/candidates/'+document.getElementById('id').value)
         .then(response => response.json())
         .then(result => {
-            this.setState({candidates:result});
+            console.log(result)
+            console.log(this.state.candidates)
+            this.setState({candidates: [result]})
+            console.log(this.state.candidates);
         })
+
+}
+
+createNewCandidate() {
+    fetch('http://localhost:8080/candidates/new?name='+document.getElementById('name').value, {method: 'POST'})
+}
+
+eliminateCandidate() {
+    fetch('http://localhost:8080/candidates/'+document.getElementById('eliminationId').value+'?isEliminated=true', {method: 'PUT'})
+}
+
+reviveCandidate() {
+    fetch('http://localhost:8080/candidates/'+document.getElementById('reviveId').value+'?isEliminated=false', {method: 'PUT'})
 }
 
     render() {
+
         return (
-            <div>
-                <div className="header-box">
-                    <h1 className="header">Requests</h1>
-                </div>
+            <div className="content">
 
-                <div className="">
-                    <div className="left">
+                <div className="btn-group">
+                    <div className="block">
                      <Button variant="contained" className="button" onClick={() => this.getAllCandidates()}>Get all candidates</Button>
-                  </div>
+                    </div>
 
-                  <div className="right">
+                    <div className="block">
                       <div>
                           <Button variant="contained" className="button" onClick={() => this.getCandidateById()}>Get candidate by id</Button>
+                      </div>
+
+                      <div>
+                          <TextField variant="outlined" size="small" label="Id" className="input-field" id="id"></TextField>
+                      </div>
+                    </div>
+
+                    <div className="block">
+                        <Button variant="contained" className="button" onClick={() => this.createNewCandidate()}>Create candidate</Button>
+
+                        <div>
+                            <TextField variant="outlined" size="small" label="Name" className="input-field" id="name"></TextField>
+                        </div>
+                    </div>
+
+                    <div className="block">
+                        <div>
+                            <Button variant="contained" className="button" onClick={() => this.eliminateCandidate()}>Eliminate candidate by id</Button>
                         </div>
 
-                       <div>
-                       <TextField variant="outlined" size="small" label="Id" className="input-field"></TextField>
-                      </div>
-                  </div>
+                        <div>
+                            <TextField variant="outlined" size="small" label="Id" className="input-field" id="eliminationId"></TextField>
+                        </div>
+                    </div>
+
+                    <div className="block">
+                        <div>
+                            <Button variant="contained" className="button" onClick={() => this.reviveCandidate()}>Revive candidate by id</Button>
+                        </div>
+
+                        <div>
+                            <TextField variant="outlined" size="small" label="Id" className="input-field" id="reviveId"></TextField>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="top-padding">
