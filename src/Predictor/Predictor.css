@@ -1,0 +1,12 @@
+.points{
+    padding-bottom: 5%;
+}
+
+.eliminated{
+    color: red;
+}
+
+.candidate{
+    display: inline-block;
+    width: 25%;
+}

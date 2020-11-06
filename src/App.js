@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import NotFound from "./NotFound/NotFound";
 import Overview from "./Overview/Overview";
 import Profile from "./Profile/Profile";
+import Predictor from "./Predictor/Predictor";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Switch>
             <Route exact from="/" component={Overview}/>
             <Route exact path="/request" component={Request}/>
-            <Route exact path="/profile" component={Profile}></Route>
+            <Route exact path="/profile" component={Profile}/>
+            <Route exact path="/predictor" component={Predictor}/>
             <Route component={NotFound}/>
         </Switch>
         </Router>

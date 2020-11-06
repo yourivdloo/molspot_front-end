@@ -8,8 +8,7 @@ class Request extends Component {
 constructor(props) {
     super(props);
     this.state = {
-        candidates:[],
-        //candidate: Object
+        candidates:[]
     }
 }
 
@@ -22,7 +21,6 @@ getAllCandidates() {
 }
 
 getCandidateById() {
-    //Werkt nog niet
     fetch('http://localhost:8080/candidates/'+document.getElementById('id').value)
         .then(response => response.json())
         .then(result => {

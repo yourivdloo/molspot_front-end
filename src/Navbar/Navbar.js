@@ -25,7 +25,7 @@ class Navbar extends Component {
                         <Button edge="start"  color="inherit" aria-label="menu" href="/request">
                             Request tests
                         </Button>
-                        <Button edge="start"  color="inherit" aria-label="menu">
+                        <Button edge="start"  color="inherit" aria-label="menu" href="/predictor">
                             Predictor
                         </Button>
                         <Button edge="start"  color="inherit" aria-label="menu">
