@@ -22,14 +22,14 @@ class Navbar extends Component {
                         <Button edge="start" color="inherit" aria-label="menu" href="/profile">
                             Profile
                         </Button>
-                        <Button edge="start"  color="inherit" aria-label="menu" href="/request">
-                            Request tests
-                        </Button>
                         <Button edge="start"  color="inherit" aria-label="menu" href="/predictor">
                             Predictor
                         </Button>
                         <Button edge="start"  color="inherit" aria-label="menu">
                             Pools
+                        </Button>
+                        <Button edge="start"  color="inherit" aria-label="menu" href="/admin">
+                            Admin page
                         </Button>
                     </div>
                     <div className="login">

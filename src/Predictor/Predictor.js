@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import './Predictor.css';
+import axios from "axios";
 
 class Predictor extends Component {
 
@@ -12,9 +13,12 @@ class Predictor extends Component {
             user: Object
         }
     }
+    localhost = "http://localhost:8080"
+    username = "superpim"
+    password = "voetbalman5"
 
-    getCandidates(){
-        fetch('http://localhost:8080/candidates')
+    getAllCandidates(){
+        fetch(this.localhost+'/candidates', {headers: {authorization: "Basic " + window.btoa(this.username +":"+ this.password), withCredentials: true}})
             .then(response => response.json()).then(
             result => {
                 this.setState({candidates:result});
@@ -22,11 +26,11 @@ class Predictor extends Component {
     }
 
     submitPoints(userId, candidateId, amount){
-        fetch('http://localhost:8080/suspicions/new?userId='+userId+'&candidateId='+candidateId+'&amount='+amount)
+        fetch(this.localhost+'/suspicions/new?userId='+userId+'&candidateId='+candidateId+'&amount='+amount, { method: 'POST',headers: {authorization: "Basic " + window.btoa(this.username +":"+ this.password), withCredentials: true}})
     }
 
     componentDidMount() {
-        this.getCandidates();
+        this.getAllCandidates();
     }
 
 
@@ -44,7 +48,7 @@ class Predictor extends Component {
                         return can.isEliminated ?
                             <div className="candidate"><h2 className="eliminated">{can.name}</h2> <Input disabled="true" inputProps={{step: 1, min: 0, max: 100, type: 'number'}}/></div>
                             :
-                            <div className="candidate"><h2>{can.name}</h2> <Input color="primary" value="0" inputProps={{step: 1, min: 0, max: 100, type: 'number'}}/></div>
+                            <div className="candidate"><h2>{can.name}</h2> <Input color="primary" placeholder="0" inputProps={{step: 1, min: 0, max: 100, type: 'number'}}/></div>
                     }
                 )}
                 </div>

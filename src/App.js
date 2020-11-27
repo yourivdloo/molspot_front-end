@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Request from "./Request/Request";
 import Navbar from "./Navbar/Navbar";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import NotFound from "./NotFound/NotFound";
 import Overview from "./Overview/Overview";
 import Profile from "./Profile/Profile";
 import Predictor from "./Predictor/Predictor";
+import Admin from "./Admin/Admin";
 
 function App() {
   return (
@@ -15,9 +15,9 @@ function App() {
         <Navbar/>
         <Switch>
             <Route exact from="/" component={Overview}/>
-            <Route exact path="/request" component={Request}/>
             <Route exact path="/profile" component={Profile}/>
             <Route exact path="/predictor" component={Predictor}/>
+            <Route exact path="/admin" component={Admin}/>
             <Route component={NotFound}/>
         </Switch>
         </Router>
