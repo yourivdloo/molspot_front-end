@@ -4,6 +4,10 @@ import Input from "@material-ui/core/Input";
 import './Admin.css';
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
+import Card from "@material-ui/core/Card";
+import {CardContent} from "@material-ui/core";
+import CardHeader from "@material-ui/core/CardHeader";
+import Typography from "@material-ui/core/Typography";
 
 class Admin extends Component {
 
@@ -38,16 +42,19 @@ class Admin extends Component {
 
     }
 
-    createNewCandidate() {
-        fetch(this.localhost+'/candidates/new?name='+document.getElementById('name').value, {method: 'POST', headers: {authorization: "Basic " + window.btoa(this.username +":"+ this.password), withCredentials: true}})
+    async createNewCandidate() {
+        await fetch(this.localhost+'/candidates/new?name='+document.getElementById('name').value, {method: 'POST', headers: {authorization: "Basic " + window.btoa(this.username +":"+ this.password), withCredentials: true}})
+        this.getAllCandidates();
     }
 
-    eliminateCandidate() {
-        fetch(this.localhost+'/candidates/'+document.getElementById('eliminationId').value+'?isEliminated=true', {method: 'PUT', headers: {authorization: "Basic " + window.btoa(this.username +":"+ this.password), withCredentials: true}})
+    async eliminateCandidate(id) {
+        await fetch(this.localhost+'/candidates/'+id+'?isEliminated=true', {method: 'PUT', headers: {authorization: "Basic " + window.btoa(this.username +":"+ this.password), withCredentials: true}})
+        this.getAllCandidates();
     }
 
-    reviveCandidate() {
-        fetch(this.localhost+'/candidates/'+document.getElementById('reviveId').value+'?isEliminated=false', {method: 'PUT', headers: {authorization: "Basic " + window.btoa(this.username +":"+ this.password), withCredentials: true}})
+    async reviveCandidate(id) {
+        await fetch(this.localhost+'/candidates/'+id+'?isEliminated=false', {method: 'PUT', headers: {authorization: "Basic " + window.btoa(this.username +":"+ this.password), withCredentials: true}})
+        this.getAllCandidates()
     }
 
     componentDidMount() {
@@ -59,21 +66,7 @@ class Admin extends Component {
         return (
             <div className="content">
 
-                <div className="btn-group">
-                    <div className="block">
-                        <Button variant="contained" className="button" onClick={() => this.getAllCandidates()}>Get all candidates</Button>
-                    </div>
-
-                    <div className="block">
-                        <div>
-                            <Button variant="contained" className="button" onClick={() => this.getCandidateById()}>Get candidate by id</Button>
-                        </div>
-
-                        <div>
-                            <TextField variant="outlined" size="small" label="Id" className="input-field" id="id"></TextField>
-                        </div>
-                    </div>
-
+                <div className="adminbtn-group">
                     <div className="block">
                         <Button variant="contained" className="button" onClick={() => this.createNewCandidate()}>Create candidate</Button>
 
@@ -81,49 +74,28 @@ class Admin extends Component {
                             <TextField variant="outlined" size="small" label="Name" className="input-field" id="name"></TextField>
                         </div>
                     </div>
-
-                    <div className="block">
-                        <div>
-                            <Button variant="contained" className="button" onClick={() => this.eliminateCandidate()}>Eliminate candidate by id</Button>
-                        </div>
-
-                        <div>
-                            <TextField variant="outlined" size="small" label="Id" className="input-field" id="eliminationId"></TextField>
-                        </div>
-                    </div>
-
-                    <div className="block">
-                        <div>
-                            <Button variant="contained" className="button" onClick={() => this.reviveCandidate()}>Revive candidate by id</Button>
-                        </div>
-
-                        <div>
-                            <TextField variant="outlined" size="small" label="Id" className="input-field" id="reviveId"></TextField>
-                        </div>
-                    </div>
                 </div>
 
-                <div className="top-padding">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>IsEliminated</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {this.state.candidates.map(can=>(
-                            <tr key={can.id}>
-                                <td>{can.id}</td>
-                                <td>{can.name}</td>
-                                <td>{can.isEliminated.toString()}</td>
-                            </tr>
-
-                        ))}
-
-                        </tbody>
-                    </table>
+                <div className="cards">
+                    {this.state.candidates.map(can=>{
+                        return can.isEliminated ?
+                            <Card className="card" variant="outlined">
+                                <CardContent>
+                                    <Typography variant="h5">{can.name}</Typography>
+                                    <Typography variant="subtitle1" color="secondary">Eliminated</Typography><br/>
+                                    <Button color="primary" variant="contained" onClick={() => this.reviveCandidate(can.id)}>Revive</Button>
+                                </CardContent>
+                            </Card>
+                            :
+                            <Card className="card" variant="outlined">
+                                <CardContent>
+                                    <Typography variant="h5">{can.name}</Typography>
+                                    <Typography variant="subtitle1" color="textSecondary">Alive</Typography><br/>
+                                    <Button id={can.id} color="secondary" variant="contained" onClick={() => this.eliminateCandidate(can.id)}>Eliminate</Button>
+                                </CardContent>
+                            </Card>
+                        })
+                    }
                 </div>
             </div>
         );

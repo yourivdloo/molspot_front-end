@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 class Overview extends Component {
     render() {
         return (
-            <div>
+            <div className="content">
                 <h1>Welcome to Molspot, try to navigate through all the other pages.</h1>
             </div>
         );

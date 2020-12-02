@@ -1,14 +1,17 @@
 .btn-group{
     min-width: 70%;
-    min-height: 100%;
+    text-align: left;
+    /*min-height: 100%;*/
 }
 
 .nav-button{
     min-height: 70px;
+    min-width: 20%;
 }
 
 .login-group{
     min-width: 15%;
+    float: right;
 }
 
 .title{

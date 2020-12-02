@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 class NotFound extends Component {
     render() {
         return (
-            <div>
+            <div className="content">
                 <h1>Oops, I think you're lost.</h1>
             </div>
         );

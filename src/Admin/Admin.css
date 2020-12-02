@@ -1,3 +1,7 @@
+body{
+    background-image: url("https://i0.wp.com/www.nccexhibition.com/wp-content/uploads/revslider/main-slide/line-bg-min.png?ssl=1");
+}
+
 .button{
     background-color: #7BBA52 !important;
     color: #282c34 !important;
@@ -21,16 +25,28 @@
 
 .content{
     padding:1%;
+
 }
 
 .block{
     display: inline-block;
     width: auto;
     margin-right: 5%;
+    margin-left: 5%;
 }
 
-.btn-group{
+.admin-btn-group{
     display: flex;
     flex: 1;
     text-align: center;
+}
+
+.card{
+    display: inline-block;
+    min-width: 20%;
+    margin:1%;
+}
+
+.cards{
+    padding-top: 5%;
 }
