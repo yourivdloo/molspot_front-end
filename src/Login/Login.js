@@ -13,6 +13,7 @@ import Container from "@material-ui/core/Container";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
+import * as axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,16 +47,30 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Login() {
-
+export default function Login(props) {
+    const {history} = props
     const classes = useStyles();
+    const localhost = "http://localhost:8080"
+
 
     function login() {
-        fetch(this.localhost + '/', {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var creds = window.btoa(username + ":" + password);
+
+        axios.get(localhost + '/users/username?username=' + username, {
             headers: {
-                authorization: "Basic " + window.btoa(this.username + ":" + this.password),
+                authorization: "Basic " + creds,
                 withCredentials: true
             }
+        }).then(
+            result => {
+                localStorage.setItem('creds', creds)
+                localStorage.setItem('username', result.data.username)
+                localStorage.setItem('id', result.data.id)
+                history.push("/")
+            }).catch((e) => {
+                window.alert("wrong credentials bro")
         })
     }
 

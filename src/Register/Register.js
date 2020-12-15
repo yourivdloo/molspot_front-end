@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import Button from "@material-ui/core/Button";
 import {Input, Typography} from "@material-ui/core";
 import * as classes from "react-dom/test-utils";
@@ -10,6 +10,7 @@ import Container from "@material-ui/core/Container";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
+import * as axios from "axios";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,21 +43,35 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    error: {
+        color: 'red',
+    },
 }));
 
 
 export default function Register() {
+    const [error, setError] = useState([]);
+
     const classes = useStyles();
 
     const localhost = "http://localhost:8080"
 
     function register() {
-        console.log("werkt wel")
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
         var email = document.getElementById('email').value;
+        var encodedCreds = window.btoa(username + ":" + password + ":" + email);
 
-        fetch(localhost + '/users/new?encryptedCredentials=' + window.btoa(username + ":" + password), {method: 'POST'})
+        axios.post(localhost + '/users/new?encodedCredentials=' + encodedCreds)
+            .then(result => {
+                if (result.ok) {
+                    localStorage.setItem("credentials", window.btoa(username + ":" + password));
+                }
+            })
+            .catch((e => {
+                setError("* " + e.response.data.message);
+            }))
+
     }
 
     return (
@@ -119,6 +134,8 @@ export default function Register() {
                                 >
                                     Register
                                 </Button>
+                                <p className={classes.error}>{error} </p>
+
                             </form>
                         </div>
                     </Container>

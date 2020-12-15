@@ -17,7 +17,6 @@ function App() {
         <Navbar/>
         <Switch>
             <Route exact from="/" component={Overview}/>
-            <Route exact path="/profile" component={Profile}/>
             <Route exact path="/predictor" component={Predictor}/>
             <Route exact path="/admin" component={Admin}/>
             <Route exact path="/login" component={Login}/>

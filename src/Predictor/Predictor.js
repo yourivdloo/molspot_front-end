@@ -23,44 +23,42 @@ class Predictor extends Component {
     password = "voetbalman5"
 
     getAllCandidates() {
-        fetch(this.localhost + '/candidates', {
+        axios.get(this.localhost + '/candidates', {
             headers: {
                 authorization: "Basic " + window.btoa(this.username + ":" + this.password),
                 withCredentials: true
             }
         })
-            .then(response => response.json()).then(
-            result => {
-                this.setState({candidates: result});
-            })
+            .then(
+                result => {
+                    this.setState({candidates: result.data});
+                })
     }
 
     getUserById(id) {
-        fetch(this.localhost + '/users/' + id, {
+        axios.get(this.localhost + '/users/' + id, {
             headers: {
                 authorization: "Basic " + window.btoa(this.username + ":" + this.password),
                 withCredentials: true
             }
         })
-            .then(response => response.json()).then(
-            result => {
-                if (result != null) {
-                    this.setState({user: result, userIsPresent: true});
-                }
-                this.setState({userIsPresent: false});
-            })
+            .then(
+                result => {
+                    if (result!=null) {
+                        this.setState({user: result.data, userIsPresent: true});
+                    }
+                })
     }
 
     submitPoints(userId, candidateId, amount) {
-        fetch(this.localhost + '/suspicions/new?userId=' + userId + '&candidateId=' + candidateId + '&amount=' + amount, {
-            method: 'POST',
+        axios.post(this.localhost + '/suspicions/new?userId=' + userId + '&candidateId=' + candidateId + '&amount=' + amount,null, {
             headers: {authorization: "Basic " + window.btoa(this.username + ":" + this.password), withCredentials: true}
         })
     }
 
     componentDidMount() {
         this.getAllCandidates();
-        this.getUserById();
+        this.getUserById(1);
     }
 
 
