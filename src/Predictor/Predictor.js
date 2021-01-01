@@ -14,18 +14,15 @@ class Predictor extends Component {
         this.state = {
             candidates: [],
             user: Object,
-            userIsPresent: Boolean
         }
     }
 
-    localhost = "http://localhost:8080"
-    username = "superpim"
-    password = "voetbalman5"
+    baseUrl = "http://localhost:8080"
 
     getAllCandidates() {
-        axios.get(this.localhost + '/candidates', {
+        axios.get(this.baseUrl + '/candidates', {
             headers: {
-                authorization: "Basic " + window.btoa(this.username + ":" + this.password),
+                authorization: "Basic " + localStorage.getItem('creds'),
                 withCredentials: true
             }
         })
@@ -35,8 +32,8 @@ class Predictor extends Component {
                 })
     }
 
-    getUserById(id) {
-        axios.get(this.localhost + '/users/' + id, {
+    getUserById() {
+        axios.get(this.baseUrl + '/users/' + localStorage.getItem('id'), {
             headers: {
                 authorization: "Basic " + window.btoa(this.username + ":" + this.password),
                 withCredentials: true
@@ -45,20 +42,20 @@ class Predictor extends Component {
             .then(
                 result => {
                     if (result!=null) {
-                        this.setState({user: result.data, userIsPresent: true});
+                        this.setState({user: result.data});
                     }
                 })
     }
 
     submitPoints(userId, candidateId, amount) {
-        axios.post(this.localhost + '/suspicions/new?userId=' + userId + '&candidateId=' + candidateId + '&amount=' + amount,null, {
-            headers: {authorization: "Basic " + window.btoa(this.username + ":" + this.password), withCredentials: true}
+        axios.post(this.baseUrl + '/suspicions/new?userId=' + userId + '&candidateId=' + candidateId + '&amount=' + amount,null, {
+            headers: {authorization: "Basic " + localStorage.getItem('creds'), withCredentials: true}
         })
     }
 
     componentDidMount() {
         this.getAllCandidates();
-        this.getUserById(1);
+        this.getUserById();
     }
 
 
@@ -68,7 +65,7 @@ class Predictor extends Component {
                 <div className="points">
                     <h1>
                         Your points <br></br>
-                        {this.state.userIsPresent ? this.state.user.points : 200}
+                        {this.state.user.points}
                     </h1>
                 </div>
                 <div>

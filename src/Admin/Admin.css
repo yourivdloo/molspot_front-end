@@ -1,52 +1,56 @@
-body{
+body {
     background-image: url("https://i0.wp.com/www.nccexhibition.com/wp-content/uploads/revslider/main-slide/line-bg-min.png?ssl=1");
 }
 
-.button{
+.button {
     background-color: #7BBA52 !important;
     color: #282c34 !important;
     font-weight: bold !important;
 }
-.button:hover{
+
+.button:hover {
     background-color: #5C8A3D !important;
 }
 
-.input-field{
+.input-field {
     font-weight: bold !important;
     margin-top: 20px !important;
     width: auto !important;
 }
 
-.container{
+.container {
     width: 20%;
     height: 100%;
     text-align: center;
 }
 
-.content{
-    padding:1%;
-
+.content {
 }
 
-.block{
+.delete{
+    float: right;
+}
+
+.block {
     display: inline-block;
     width: auto;
     margin-right: 5%;
     margin-left: 5%;
 }
 
-.admin-btn-group{
+.admin-btn-group {
     display: flex;
     flex: 1;
     text-align: center;
 }
 
-.card{
+.card {
     display: inline-block;
     min-width: 20%;
-    margin:1%;
+    margin: 1%;
+    min-height: 150px;
 }
 
-.cards{
-    padding-top: 5%;
+.cards {
+    padding-top: 1%;
 }

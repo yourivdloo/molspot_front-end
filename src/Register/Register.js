@@ -54,7 +54,7 @@ export default function Register() {
 
     const classes = useStyles();
 
-    const localhost = "http://localhost:8080"
+    const baseUrl = "http://localhost:8080"
 
     function register() {
         var username = document.getElementById('username').value;
@@ -62,7 +62,7 @@ export default function Register() {
         var email = document.getElementById('email').value;
         var encodedCreds = window.btoa(username + ":" + password + ":" + email);
 
-        axios.post(localhost + '/users/new?encodedCredentials=' + encodedCreds)
+        axios.post(baseUrl + '/users/new?encodedCredentials=' + encodedCreds)
             .then(result => {
                 if (result.ok) {
                     localStorage.setItem("credentials", window.btoa(username + ":" + password));

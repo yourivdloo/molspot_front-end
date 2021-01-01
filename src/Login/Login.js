@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Login(props) {
     const {history} = props
     const classes = useStyles();
-    const localhost = "http://localhost:8080"
+    const baseUrl = "http://localhost:8080"
 
 
     function login() {
@@ -58,7 +58,7 @@ export default function Login(props) {
         var password = document.getElementById('password').value;
         var creds = window.btoa(username + ":" + password);
 
-        axios.get(localhost + '/users/username?username=' + username, {
+        axios.get(baseUrl + '/users/username?username=' + username, {
             headers: {
                 authorization: "Basic " + creds,
                 withCredentials: true
