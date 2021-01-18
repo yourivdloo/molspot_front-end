@@ -1,7 +1,6 @@
-import React, {Component, useState} from "react";
+import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
-import {Input, Typography} from "@material-ui/core";
-import * as classes from "react-dom/test-utils";
+import {Typography} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
@@ -49,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Register() {
+export default function Register(props) {
+    const {history} = props
     const [error, setError] = useState([]);
 
     const classes = useStyles();
@@ -66,6 +66,7 @@ export default function Register() {
             .then(result => {
                 if (result.ok) {
                     localStorage.setItem("credentials", window.btoa(username + ":" + password));
+                    history.push("/")
                 }
             })
             .catch((e => {
@@ -91,7 +92,6 @@ export default function Register() {
                             </Typography>
                             <form className={classes.form} noValidate>
                                 <TextField
-                                    variant="outlined"
                                     margin="normal"
                                     autoComplete="username"
                                     name="username"

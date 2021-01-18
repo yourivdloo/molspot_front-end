@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { Route , withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 
 class Navbar extends Component {
@@ -12,13 +12,14 @@ class Navbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: Object,
         }
     }
 
+    baseUrl = "http://localhost:8080"
+
     isLoggedIn(){
-        console.log("isLoggedIn navbar function")
         if (localStorage.getItem('creds') != null && localStorage.getItem('creds') != ""){
-            console.log("creds are present, loggedIn is true")
             return true;
         }
             return false;
@@ -26,7 +27,7 @@ class Navbar extends Component {
 
     logout(){
         localStorage.clear()
-        this.props.history.push('/login')
+        this.props.history.push('/')
     }
 
     navbarAction = url => {
@@ -38,7 +39,7 @@ class Navbar extends Component {
     }
 
     async componentDidMount() {
-        await this.isLoggedIn()
+        await this.isLoggedIn();
     }
 
     render() {
@@ -49,23 +50,37 @@ class Navbar extends Component {
                         <Typography variant="h6" className="title" id="title">
                             Molspot
                         </Typography>
-                        <div className="btn-group">
-                            <Button edge="start" className="nav-button" color="inherit" aria-label="menu" onClick={() => this.navbarAction('/')}>
-                                Home
-                            </Button>
-                            <Button edge="start" className="nav-button" color="inherit" aria-label="menu"
-                                    onClick={() => this.navbarAction('/predictor')}>
-                                Predictor
-                            </Button>
-                            <Button edge="start" className="nav-button" color="inherit" aria-label="menu">
-                                Pools
-                            </Button>
-                            <Button edge="start" className="nav-button" color="inherit" aria-label="menu" onClick={() => this.navbarAction('/admin')}>
-                                Admin page
-                            </Button>
-                        </div>
+                        {this.isLoggedIn() ?
+                            <div className="btn-group">
+                                <Button edge="start" className="nav-button" color="inherit" aria-label="menu" onClick={() => this.navbarAction('/')}>
+                                    Home
+                                </Button>
+                                <Button edge="start" className="nav-button" color="inherit" aria-label="menu"
+                                        onClick={() => this.navbarAction('/predictor')}>
+                                    Predictor
+                                </Button>
+                                {localStorage.getItem('role') == "ROLE_ADMIN" ?
+                                    <Button edge="start" className="nav-button" color="inherit" aria-label="menu" onClick={() => this.navbarAction('/admin')}>
+                                        Admin page
+                                    </Button>
+                                    :
+                                    <div>
+                                    </div>
+                                }
+
+                            </div> :
+                            <div className="btn-group">
+                                <Button edge="start" className="nav-button" color="inherit" aria-label="menu" onClick={() => this.navbarAction('/')}>
+                                    Home
+                                </Button>
+                            </div>
+                        }
+
                             {this.isLoggedIn() ?
                                 <div className="login-group">
+                                    <Typography className="username" variant="h7">
+                                        {localStorage.getItem('username')}
+                                    </Typography>
                                 <Button edge="start" color="inherit" aria-label="menu" className="nav-button" href="/login"
                                 onClick={() => this.navbarAction('/logout')}>Log out</Button>
                                 </div>

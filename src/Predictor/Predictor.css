@@ -2,7 +2,7 @@ body{
     background-image: url("https://i0.wp.com/www.nccexhibition.com/wp-content/uploads/revslider/main-slide/line-bg-min.png?ssl=1");
 }
 .points{
-    padding-bottom: 5%;
+    /*padding-bottom: 5%;*/
 }
 
 .eliminated{
@@ -12,9 +12,19 @@ body{
 .candidate{
     display: inline-block;
     min-width: 20%;
+    max-height: 100px;
     margin:1%;
 }
 
 .eliminated{
     color: red;
+}
+
+.msg{
+    min-height: 120px;
+}
+
+.loading{
+    max-height: 5%;
+    max-width: 5%;
 }

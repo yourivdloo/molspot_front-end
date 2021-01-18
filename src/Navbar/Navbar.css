@@ -1,24 +1,33 @@
 .btn-group{
-    min-width: 70%;
+    min-width: 75%;
     text-align: left;
     /*min-height: 100%;*/
 }
 
 .nav-button{
-    min-height: 70px;
+    min-height: 8.2vh;
     min-width: 20%;
+    display: inline-block;
 }
 
 .login-group{
     min-width: 15%;
     float: right;
+    text-align: right;
+}
+
+.username{
+    display: inline-block;
+    padding-right: 10%;
+    min-width: 20%;
 }
 
 .title{
-    min-width: 15%;
+    min-width: 10%;
     float: left;
 }
 
 .navbar{
     background-color: #7BBA52 !important;
+    min-height: 8.2vh;
 }

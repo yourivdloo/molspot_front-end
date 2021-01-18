@@ -7,10 +7,6 @@ import Card from "@material-ui/core/Card";
 import {CardContent} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from '@material-ui/icons/Delete';
-import CardActions from "@material-ui/core/CardActions";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 
 class Admin extends Component {
 
@@ -50,7 +46,7 @@ class Admin extends Component {
             }).catch((e) => {
                 if (e.response == null) {
                     this.setState({episodes: []})
-                    this.props.history.push('/login')
+                    this.props.history.push('/notfound')
                 } else {
                     if (e.response.status == '404') {
                         this.setState({candidates: []})
@@ -116,7 +112,7 @@ class Admin extends Component {
         }
     }
 
-    async getAllEpisodes(e) {
+    async getAllEpisodes() {
         axios.get(this.baseUrl + '/episodes', {
             headers: {
                 authorization: "Basic " + localStorage.getItem('creds'),
@@ -128,7 +124,7 @@ class Admin extends Component {
             }).catch((e) => {
                 if (e.response == null) {
                     this.setState({episodes: []})
-                    this.props.history.push('/login')
+                    this.props.history.push('/notfound')
                 } else {
                     if (e.response.status == '404') {
                         this.setState({episodes: []})
@@ -151,7 +147,8 @@ class Admin extends Component {
     async endEpisode(id) {
         var r = window.confirm("Are you sure you want to end this episode")
         if (r) {
-            await axios.put(this.baseUrl + '/episodes/' + id + '?hasEnded=true', null, {
+            //await axios.put(this.baseUrl + '/episodes/' + id + '?hasEnded=true', null, {
+            await axios.put(this.baseUrl + '/episodes/' + id + '/end', null, {
                 headers: {
                     authorization: "Basic " + localStorage.getItem('creds'),
                     withCredentials: true

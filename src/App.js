@@ -4,7 +4,6 @@ import Navbar from "./Navbar/Navbar";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import NotFound from "./NotFound/NotFound";
 import Overview from "./Overview/Overview";
-import Profile from "./Profile/Profile";
 import Predictor from "./Predictor/Predictor";
 import Admin from "./Admin/Admin";
 import Login from "./Login/Login";

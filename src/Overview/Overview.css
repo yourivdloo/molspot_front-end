@@ -1,3 +1,13 @@
 body{
     background-image: url("https://i0.wp.com/www.nccexhibition.com/wp-content/uploads/revslider/main-slide/line-bg-min.png?ssl=1");
 }
+
+.content{
+    position: absolute;
+    top: 0;
+    bottom: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 100px;
+}

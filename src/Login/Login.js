@@ -1,11 +1,7 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
-import {Input, Typography} from "@material-ui/core";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import * as classes from "react-dom/test-utils";
+import {Typography} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
 import TextField from "@material-ui/core/TextField";
 import Avatar from "@material-ui/core/Avatar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -17,7 +13,7 @@ import * as axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        height: '91.1vh',
+        height: '91.8vh',
     },
 
     image: {
@@ -45,10 +41,14 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    error: {
+        color: "red",
+    }
 }));
 
 export default function Login(props) {
     const {history} = props
+    const [error, setError] = useState([]);
     const classes = useStyles();
     const baseUrl = "http://localhost:8080"
 
@@ -68,9 +68,10 @@ export default function Login(props) {
                 localStorage.setItem('creds', creds)
                 localStorage.setItem('username', result.data.username)
                 localStorage.setItem('id', result.data.id)
+                localStorage.setItem('role', result.data.roles)
                 history.push("/")
             }).catch((e) => {
-                window.alert("wrong credentials bro")
+                setError("Wrong credentials bro");
         })
     }
 
@@ -95,7 +96,6 @@ export default function Login(props) {
                                     margin="normal"
                                     autoComplete="username"
                                     name="username"
-                                    variant="outlined"
                                     required
                                     fullWidth
                                     id="username"
@@ -123,6 +123,7 @@ export default function Login(props) {
                                 >
                                     Log in
                                 </Button>
+                                <p className={classes.error}>{error} </p>
                             </form>
                         </div>
                     </Container>
