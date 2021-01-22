@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import './Profile.css';
-import Button from "@material-ui/core/Button";
 
 class Profile extends Component {
     render() {

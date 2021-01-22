@@ -16,8 +16,6 @@ class Navbar extends Component {
         }
     }
 
-    baseUrl = "http://localhost:8080"
-
     isLoggedIn(){
         if (localStorage.getItem('creds') != null && localStorage.getItem('creds') != ""){
             return true;

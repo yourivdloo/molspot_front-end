@@ -70,9 +70,9 @@ export default function Login(props) {
                 localStorage.setItem('id', result.data.id)
                 localStorage.setItem('role', result.data.roles)
                 history.push("/")
-            }).catch((e) => {
-                setError("Wrong credentials bro");
-        })
+            }).catch(
+                setError("Wrong credentials bro")
+        )
     }
 
     return (

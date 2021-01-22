@@ -64,10 +64,11 @@ export default function Register(props) {
 
         axios.post(baseUrl + '/users/new?encodedCredentials=' + encodedCreds)
             .then(result => {
-                if (result.ok) {
-                    localStorage.setItem("credentials", window.btoa(username + ":" + password));
+                localStorage.setItem("creds", window.btoa(username + ":" + password));
+                localStorage.setItem('username', result.data.username)
+                localStorage.setItem('id', result.data.id)
+                localStorage.setItem('role', result.data.roles)
                     history.push("/")
-                }
             })
             .catch((e => {
                 setError("* " + e.response.data.message);

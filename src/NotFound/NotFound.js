@@ -1,6 +1,5 @@
 import React,{Component} from "react";
 import './NotFound.css';
-import Button from "@material-ui/core/Button";
 
 class NotFound extends Component {
     render() {

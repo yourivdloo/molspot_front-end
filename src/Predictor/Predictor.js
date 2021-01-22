@@ -90,7 +90,7 @@ class Predictor extends Component {
         console.log("points "+points+" : oldSusAmount "+susSum);
         console.log("newSusAmount: "+newSusSum)
         if (newSusSum <= points) {
-             var result = await this.resetUserPoints(points);
+             await this.resetUserPoints(points);
              await this.submitPoints();
         } else{
             this.setState({msg: "Oops, you have added way too many points!"})
@@ -116,11 +116,11 @@ class Predictor extends Component {
                     }).then(
                         result => {
                             if (i == this.state.candidates.length-1){
-                                this.setState({msg: "Suspicions succesfully saved", finished: true});
+                                this.setState({msg: "Suspicions successfully saved", finished: true});
                             }
-                        }).catch((e) => {
+                        }).catch(
                             this.setState({msg: "Something went wrong", finished: true})
-                    })
+                    )
                 }
             }
         } else {
@@ -140,7 +140,7 @@ class Predictor extends Component {
                     }).then(
                         result => {
                             if (i == this.state.candidates.length-1){
-                                this.setState({msg: "Suspicions succesfully saved", finished: true})
+                                this.setState({msg: "Suspicions successfully saved", finished: true})
                             }
                         }).catch((e) => {
                         this.setState({msg: "Something went wrong", finished: true})
@@ -191,7 +191,7 @@ class Predictor extends Component {
                 {this.state.msg == "Saving..." ?
                     <div className="msg">
                         <Typography variant="h6">{this.state.msg}</Typography>
-                        <img className="loading" src="https://lh3.googleusercontent.com/proxy/qlmXX6XKHGg0bVLFrqb2128HyMhcbsLbktcSdB9nkkq6CvQg7MwexB-3uvyLIcIz4T6PE0r7li93whNx8GdaiCVFQ-BcgA1D"></img>
+                        <img alt="Loading" className="loading" src="https://lh3.googleusercontent.com/proxy/qlmXX6XKHGg0bVLFrqb2128HyMhcbsLbktcSdB9nkkq6CvQg7MwexB-3uvyLIcIz4T6PE0r7li93whNx8GdaiCVFQ-BcgA1D"/>
                     </div> :
                     <div className="msg">
                         <br/>

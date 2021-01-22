@@ -60,7 +60,7 @@ reviveCandidate() {
                       </div>
 
                       <div>
-                          <TextField variant="outlined" size="small" label="Id" className="input-field" id="id"></TextField>
+                          <TextField variant="outlined" size="small" label="Id" className="input-field" id="id"/>
                       </div>
                     </div>
 
@@ -68,7 +68,7 @@ reviveCandidate() {
                         <Button variant="contained" className="button" onClick={() => this.createNewCandidate()}>Create candidate</Button>
 
                         <div>
-                            <TextField variant="outlined" size="small" label="Name" className="input-field" id="name"></TextField>
+                            <TextField variant="outlined" size="small" label="Name" className="input-field" id="name"/>
                         </div>
                     </div>
 
@@ -78,7 +78,7 @@ reviveCandidate() {
                         </div>
 
                         <div>
-                            <TextField variant="outlined" size="small" label="Id" className="input-field" id="eliminationId"></TextField>
+                            <TextField variant="outlined" size="small" label="Id" className="input-field" id="eliminationId"/>
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@ reviveCandidate() {
                         </div>
 
                         <div>
-                            <TextField variant="outlined" size="small" label="Id" className="input-field" id="reviveId"></TextField>
+                            <TextField variant="outlined" size="small" label="Id" className="input-field" id="reviveId"/>
                         </div>
                     </div>
                 </div>

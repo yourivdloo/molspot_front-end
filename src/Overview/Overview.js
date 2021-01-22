@@ -14,7 +14,7 @@ class Overview extends Component {
     render() {
         return (
             <div className="content">
-                <h1>Welcome to Molspot {this.isLoggedIn() ? localStorage.getItem('username') : ''},</h1>
+                <h1>Welcome to Molspot {this.isLoggedIn() ? localStorage.getItem('username').toString() : ''},</h1>
             <br/>
                 {this.isLoggedIn() ?
                     <h1>we from Molspot wish you a very good time using our application.</h1>

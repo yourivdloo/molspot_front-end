@@ -75,8 +75,9 @@ class Admin extends Component {
                 authorization: "Basic " + localStorage.getItem('creds'),
                 withCredentials: true
             }
-        })
-        this.getAllCandidates();
+        }).then(
+                this.getAllCandidates()
+            )
     }
 
     async eliminateCandidate(id) {
@@ -85,8 +86,9 @@ class Admin extends Component {
                 authorization: "Basic " + localStorage.getItem('creds'),
                 withCredentials: true
             }
-        })
-        this.getAllCandidates();
+        }).then(
+                this.getAllCandidates()
+            )
     }
 
     async reviveCandidate(id) {
@@ -95,8 +97,9 @@ class Admin extends Component {
                 authorization: "Basic " + localStorage.getItem('creds'),
                 withCredentials: true
             }
-        })
-        this.getAllCandidates()
+        }).then(
+                this.getAllCandidates()
+            )
     }
 
     async deleteCandidate(id) {
@@ -107,8 +110,9 @@ class Admin extends Component {
                     authorization: "Basic " + localStorage.getItem('creds'),
                     withCredentials: true
                 }
-            })
-            this.getAllCandidates()
+            }).then(
+                    this.getAllCandidates()
+                )
         }
     }
 
@@ -135,26 +139,30 @@ class Admin extends Component {
     }
 
     async createNewEpisode() {
+        console.log(document.getElementById('startDate'))
         await axios.post(this.baseUrl + '/episodes/new?startDate=' + document.getElementById('startDate').value, null, {
             headers: {
                 authorization: "Basic " + localStorage.getItem('creds'),
                 withCredentials: true
             }
+        }).then(
+                this.getAllEpisodes()
+        ).catch((e) => {
+            console.log(e)
         })
-        this.getAllEpisodes()
     }
 
     async endEpisode(id) {
         var r = window.confirm("Are you sure you want to end this episode")
         if (r) {
-            //await axios.put(this.baseUrl + '/episodes/' + id + '?hasEnded=true', null, {
             await axios.put(this.baseUrl + '/episodes/' + id + '/end', null, {
                 headers: {
                     authorization: "Basic " + localStorage.getItem('creds'),
                     withCredentials: true
                 }
-            })
-            this.getAllEpisodes()
+            }).then(
+                    this.getAllEpisodes()
+                )
         }
     }
 
@@ -166,8 +174,9 @@ class Admin extends Component {
                     authorization: "Basic " + localStorage.getItem('creds'),
                     withCredentials: true
                 }
-            })
-            this.getAllEpisodes()
+            }).then(
+                    this.getAllEpisodes()
+                )
         }
     }
 
@@ -190,7 +199,7 @@ class Admin extends Component {
 
                             <div>
                                 <TextField variant="outlined" size="small" label="Name" className="input-field"
-                                           id="name"></TextField>
+                                           id="name"/>
                             </div>
                         </CardContent>
                     </Card>
@@ -205,7 +214,7 @@ class Admin extends Component {
                                     id="startDate"
                                     label="Start date"
                                     type="datetime-local"
-                                    defaultValue="2021-02-25T20:30"
+                                    defaultValue="2021-01-30T20:30"
                                     className="input-field"
                                     InputLabelProps={{
                                         shrink: true,
@@ -236,7 +245,7 @@ class Admin extends Component {
                                                 <div>
                                                     <Button className="delete"
                                                             onClick={() => this.deleteCandidate(can.id)}>
-                                                        <DeleteIcon fontSize="large" color="secondary"></DeleteIcon>
+                                                        <DeleteIcon fontSize="large" color="secondary"/>
                                                     </Button>
                                                 </div>
                                             </CardContent>
@@ -253,7 +262,7 @@ class Admin extends Component {
                                                 <div>
                                                     <Button className="delete"
                                                             onClick={() => this.deleteCandidate(can.id)}>
-                                                        <DeleteIcon fontSize="large" color="secondary"></DeleteIcon>
+                                                        <DeleteIcon fontSize="large" color="secondary"/>
                                                     </Button>
                                                 </div>
                                             </CardContent>
@@ -279,7 +288,7 @@ class Admin extends Component {
                                             {/*        onClick={() => this.endEpisode(e.id)}>End</Button>*/}
                                             <div>
                                                 <Button className="delete" onClick={() => this.deleteEpisode(e.id)}>
-                                                    <DeleteIcon fontSize="large" color="secondary"></DeleteIcon>
+                                                    <DeleteIcon fontSize="large" color="secondary"/>
                                                 </Button>
                                             </div>
                                         </CardContent>
@@ -295,7 +304,7 @@ class Admin extends Component {
                                             </Button>
                                             <div>
                                                 <Button className="delete" onClick={() => this.deleteEpisode(e.id)}>
-                                                    <DeleteIcon fontSize="large" color="secondary"></DeleteIcon>
+                                                    <DeleteIcon fontSize="large" color="secondary"/>
                                                 </Button>
                                             </div>
                                         </CardContent>
